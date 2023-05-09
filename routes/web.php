@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/categoria/setRegistrarCategoria', [CategoriaController::class, 'setRegistrarCategoria']);
+Route::get('/categoria/getListarCategoria', [CategoriaController::class, 'getListarCategoria']);
+Route::delete('/categoria/delCategoria/{id}', [CategoriaController::class, 'delCategoria']);
+Route::post('/categoria/editCategoria/{id}', [CategoriaController::class, 'editCategoria']);
+
+
 Route::get('/{optional?}', function () {
     return view('plantilla');
-})->name('basepath')
-->where('optional','.*');;
+})->where('any', '.*');;
+
+

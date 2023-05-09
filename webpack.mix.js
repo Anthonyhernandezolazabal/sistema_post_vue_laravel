@@ -13,12 +13,15 @@ const mix = require('laravel-mix');
 mix.styles([
     'resources/vendor/css/adminlte.min.css',
     'resources/vendor/css/all.min.css',
-    'resources/vendor/css/config.css'
+    'resources/vendor/css/config.css',
+    //Plugins
+    'resources/vendor/js/plugins/toastr/toastr.min.css'
     ], 'public/css/plantilla.css')
     .js('resources/js/app.js', 'public/js')
     .scripts([
     'resources/vendor/js/adminlte.min.js',
-    'resources/vendor/js/demo.js'
+    //Plugins
+    'resources/vendor/js/plugins/toastr/toastr.min.js'
     ], 'public/js/plantilla.js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css')

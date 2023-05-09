@@ -14,6 +14,11 @@ export const rutas = [
         name: "usuarios.index",
         component: require("./components/modulos/Usuarios/index.vue").default,
     },
+    {
+        path: "/categorias",
+        name: "categorias.index",
+        component: require("./components/modulos/Categorias/index.vue").default,
+    },
 
 ]
 

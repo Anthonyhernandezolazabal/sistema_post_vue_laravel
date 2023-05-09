@@ -67,10 +67,10 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <a href="../widgets.html" class="nav-link">
-                <i class="nav-icon far fas fa-th"></i>
-                <p>Categorías</p>
-              </a>
+                <router-link :to="'categorias'"  class="nav-link">
+                    <i class="nav-icon far fas fa-th"></i>
+                    <p>Categorías</p>
+                </router-link>
             </li>
             <li class="nav-item">
               <a href="../widgets.html" class="nav-link">
