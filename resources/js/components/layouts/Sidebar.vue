@@ -4,7 +4,7 @@
       <!-- Brand Logo -->
       <a href="../../index3.html" class="brand-link">
         <img
-          :src="'img/icono-blanco.png'"
+          :src="'/img/icono-blanco.png'"
           alt="AdminLTE Logo"
           class="brand-image img-circle elevation-3"
           style="opacity: 0.8"
@@ -17,7 +17,7 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
             <img
-              :src="'./img/user2-160x160.jpg'"
+              :src="'/img/user2-160x160.jpg'"
               class="img-circle elevation-2"
               alt="User Image"
             />
@@ -61,13 +61,13 @@
             </router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="'usuarios'" class="nav-link">
+              <router-link :to="'/usuarios'" class="nav-link">
                 <i class="nav-icon far fa fa-user"></i>
                 <p>Usuarios</p>
               </router-link>
             </li>
             <li class="nav-item">
-                <router-link :to="'categorias'"  class="nav-link">
+                <router-link :to="'/categorias'"  class="nav-link">
                     <i class="nav-icon far fas fa-th"></i>
                     <p>Categorías</p>
                 </router-link>
@@ -79,10 +79,10 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="clientes" class="nav-link">
-                <i class="nav-icon far fas fa-users"></i>
-                <p>Clientes</p>
-              </a>
+                <router-link :to="'/clientes'" class="nav-link">
+                    <i class="nav-icon far fas fa-users"></i>
+                    <p>Clientes</p>
+                </router-link>
             </li>
             <li class="nav-header">VENTAS</li>
             <li class="nav-item">

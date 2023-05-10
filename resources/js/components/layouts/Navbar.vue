@@ -19,7 +19,7 @@
             aria-expanded="false"
           >
             <img
-              :src="'./img/user2-160x160.jpg'"
+              :src="'/img/user2-160x160.jpg'"
               class="img-circle"
               height="30px"
             />

@@ -19,6 +19,21 @@ export const rutas = [
         name: "categorias.index",
         component: require("./components/modulos/Categorias/index.vue").default,
     },
+    {
+        path: "/clientes",
+        name: "clientes.index",
+        component: require("./components/modulos/Clientes/index.vue").default,
+    },
+    {
+        path: "/clientes/crear-cliente",
+        name: "clientes.create",
+        component: require("./components/modulos/Clientes/create.vue").default,
+    },
+    {
+        path: "/clientes/editar-cliente/:id",
+        name: "clientes.edit",
+        component: require("./components/modulos/Clientes/edit.vue").default,
+    },
 
 ]
 
