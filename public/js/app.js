@@ -5523,6 +5523,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
@@ -6696,6 +6702,283 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/modulos/Marcas/index.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/modulos/Marcas/index.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  mounted: function mounted() {
+    console.log("Component index.");
+  },
+  data: function data() {
+    return {
+      fillCrearMarca: {
+        cNombre: "",
+        cEstado: 0
+      },
+      validarcampo: false,
+      msmvalidar: "",
+      strCat: "",
+      fullscreenLoading: false,
+      listMarcas: []
+    };
+  },
+  created: function created() {
+    this.getListarMarca();
+  },
+  methods: {
+    getListarMarca: function getListarMarca() {
+      var _this = this;
+      axios.get("/marca/getListarMarca").then(function (rpta) {
+        return _this.listMarcas = rpta.data;
+      })["catch"](function (error) {
+        // handle error
+        toastr.error("Ocurrió un error al motrar registro.");
+      });
+    },
+    setRegistrarMarca: function setRegistrarMarca() {
+      var _this2 = this;
+      console.log("pruebaaaa... :", this.fillCrearMarca.cNombre);
+      this.fullscreenLoading = true;
+      if (!this.fillCrearMarca.cNombre) {
+        this.msmvalidar = "Este campo es obligatorio.";
+        this.validarcampo = true;
+        this.fullscreenLoading = false;
+      } else {
+        axios.post("/marca/setRegistrarMarca", {
+          nombre: this.fillCrearMarca.cNombre,
+          estado: this.fillCrearMarca.cEstado
+        }).then(function (response) {
+          toastr.success("Marca " + _this2.fillCrearMarca.cNombre + " registrado.");
+          _this2.validarcampo = false;
+          _this2.fullscreenLoading = false;
+          _this2.fillCrearMarca.cNombre = "";
+          _this2.getListarMarca();
+        })["catch"](function (error) {
+          _this2.fullscreenLoading = false;
+        });
+      }
+    },
+    delMarca: function delMarca(id, nom) {
+      var _this3 = this;
+      var swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success mr-2",
+          cancelButton: "btn btn-danger mr-2"
+        },
+        buttonsStyling: false
+      });
+      swalWithBootstrapButtons.fire({
+        title: "¿Desea eliminar " + nom + "?",
+        text: "¡No podrá revertir esta acción!",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "No, cancelar!",
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios["delete"]("/marca/delMarca/" + id).then(function (response) {
+            console.log("deleted :", response);
+            toastr.success("Marca " + nom + " eliminado.");
+            _this3.getListarMarca();
+          })["catch"](function (error) {
+            toastr.error(error);
+          });
+        }
+      });
+    },
+    showEdit: function showEdit(id, nom) {
+      var _this4 = this;
+      Swal.fire({
+        title: "Editar Marca",
+        input: "text",
+        showCancelButton: true,
+        confirmButtonText: "Guardar",
+        cancelButtonText: "Cancelar",
+        inputValue: nom,
+        inputValidator: function inputValidator(nombre) {
+          // Si el valor es válido, debes regresar undefined. Si no, una cadena
+          if (!nombre) {
+            return "Este campo es obligatorio.";
+          } else {
+            return undefined;
+          }
+        }
+      }).then(function (resultado) {
+        if (resultado.value) {
+          axios.post('/marca/editMarca/' + id, {
+            'nombre': resultado.value
+          }).then(function (rpta) {
+            toastr.success("La Marca se ha editado.");
+            _this4.getListarMarca();
+          })["catch"](function (error) {
+            toastr.error(error);
+          });
+        }
+      });
+    },
+    cambiarEstado: function cambiarEstado(e, id) {
+      var _this5 = this;
+      //0: activo    1: inactivo
+      var estado = e == 1 ? 0 : 1; //Si viene en 1 me lo cambia a 0 y si viene en 0 me lo cambia a 1
+      var tipoestado = estado == 1 ? 'Inactivo' : 'Activo';
+      axios.post('/marca/editMarca/' + id, {
+        'estado': estado
+      }).then(function (rpta) {
+        Swal.fire({
+          position: 'top-center',
+          icon: 'success',
+          title: 'Pasó a estado ' + tipoestado,
+          showConfirmButton: false,
+          timer: 1500
+        });
+        _this5.getListarMarca();
+      })["catch"](function (error) {
+        toastr.error(error);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/modulos/Usuarios/index.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/modulos/Usuarios/index.vue?vue&type=script&lang=js& ***!
@@ -6989,6 +7272,10 @@ var rutas = [{
   path: "/categorias",
   name: "categorias.index",
   component: (__webpack_require__(/*! ./components/modulos/Categorias/index.vue */ "./resources/js/components/modulos/Categorias/index.vue")["default"])
+}, {
+  path: "/marcas",
+  name: "marcas.index",
+  component: (__webpack_require__(/*! ./components/modulos/Marcas/index.vue */ "./resources/js/components/modulos/Marcas/index.vue")["default"])
 }, {
   path: "/clientes",
   name: "clientes.index",
@@ -34023,6 +34310,45 @@ component.options.__file = "resources/js/components/modulos/Dashboard/index.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/modulos/Marcas/index.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/modulos/Marcas/index.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _index_vue_vue_type_template_id_24376512___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=24376512& */ "./resources/js/components/modulos/Marcas/index.vue?vue&type=template&id=24376512&");
+/* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "./resources/js/components/modulos/Marcas/index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _index_vue_vue_type_template_id_24376512___WEBPACK_IMPORTED_MODULE_0__.render,
+  _index_vue_vue_type_template_id_24376512___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/modulos/Marcas/index.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/modulos/Usuarios/index.vue":
 /*!************************************************************!*\
   !*** ./resources/js/components/modulos/Usuarios/index.vue ***!
@@ -34190,6 +34516,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/modulos/Marcas/index.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/modulos/Marcas/index.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/modulos/Marcas/index.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/modulos/Usuarios/index.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/modulos/Usuarios/index.vue?vue&type=script&lang=js& ***!
@@ -34338,6 +34680,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_6152edac___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_6152edac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=template&id=6152edac& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/modulos/Dashboard/index.vue?vue&type=template&id=6152edac&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/modulos/Marcas/index.vue?vue&type=template&id=24376512&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/modulos/Marcas/index.vue?vue&type=template&id=24376512& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_24376512___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_24376512___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_24376512___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=template&id=24376512& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/modulos/Marcas/index.vue?vue&type=template&id=24376512&");
 
 
 /***/ }),
@@ -34616,6 +34975,23 @@ var render = function () {
                         _c("i", { staticClass: "nav-icon far fas fa-th" }),
                         _vm._v(" "),
                         _c("p", [_vm._v("Categorías")]),
+                      ]
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { staticClass: "nav-link", attrs: { to: "/marcas" } },
+                      [
+                        _c("i", { staticClass: "nav-icon far fas fa-tag" }),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Marcas")]),
                       ]
                     ),
                   ],
@@ -34971,7 +35347,10 @@ var staticRenderFns = [
       _c("div", { staticClass: "container-fluid" }, [
         _c("div", { staticClass: "row mb-2" }, [
           _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", [_vm._v("Administrar categorías")]),
+            _c("h1", [
+              _c("i", { staticClass: "nav-icon far fas fa-th" }),
+              _vm._v("Administrar categorías"),
+            ]),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-6" }, [
@@ -36330,6 +36709,300 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "card-footer" }, [_vm._v("Footer")]),
           ]),
+        ]),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/modulos/Marcas/index.vue?vue&type=template&id=24376512&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/modulos/Marcas/index.vue?vue&type=template&id=24376512& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "card card-primary card-outline" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "input-group mb-0" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.fillCrearMarca.cNombre,
+                        expression: "fillCrearMarca.cNombre",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Ingresar Marca" },
+                    domProps: { value: _vm.fillCrearMarca.cNombre },
+                    on: {
+                      keyup: function ($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.setRegistrarMarca.apply(null, arguments)
+                      },
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.fillCrearMarca,
+                          "cNombre",
+                          $event.target.value
+                        )
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _vm.validarcampo
+                  ? _c("small", {
+                      staticClass: "text-danger",
+                      domProps: { textContent: _vm._s(_vm.msmvalidar) },
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-block btn-flat mt-3",
+                    attrs: { disabled: _vm.fullscreenLoading },
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        return _vm.setRegistrarMarca.apply(null, arguments)
+                      },
+                    },
+                  },
+                  [_vm._v("\n            Marca    Registrar\n              ")]
+                ),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-8" }, [
+            _c("div", { staticClass: "card card-info card-outline" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("table", { staticClass: "table table-striped projects" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.listMarcas, function (item) {
+                      return _c("tr", { key: item.id }, [
+                        _c("td", {
+                          domProps: { textContent: _vm._s(item.id) },
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(item.nombre) },
+                        }),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "project-state text-center" }, [
+                          item.estado === 0
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "badge badge-success",
+                                  staticStyle: { cursor: "pointer" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.cambiarEstado(
+                                        item.estado,
+                                        item.id
+                                      )
+                                    },
+                                  },
+                                },
+                                [_vm._v("Activo")]
+                              )
+                            : item.estado === 1
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "badge badge-danger",
+                                  staticStyle: { cursor: "pointer" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.cambiarEstado(
+                                        item.estado,
+                                        item.id
+                                      )
+                                    },
+                                  },
+                                },
+                                [_vm._v("Inactivo")]
+                              )
+                            : _c(
+                                "span",
+                                { staticClass: "badge badge-danger" },
+                                [_vm._v("Error")]
+                              ),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "project-actions text-center" },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-warning btn-sm",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.showEdit(item.id, item.nombre)
+                                  },
+                                },
+                              },
+                              [_c("i", { staticClass: "fas fa-pencil-alt" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-sm",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.delMarca(item.id, item.nombre)
+                                  },
+                                },
+                              },
+                              [_c("i", { staticClass: "fas fa-trash" })]
+                            ),
+                          ]
+                        ),
+                      ])
+                    }),
+                    0
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", [
+              _c("i", { staticClass: "nav-icon far fas fa-tag" }),
+              _vm._v(" Administrar marcas"),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Inicio")]),
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Marcas"),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _c("i", { staticClass: "fas fa-edit" }),
+        _vm._v("\n                Registrar Marca\n              "),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("i", { staticClass: "far fas fa-th" }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _c("i", { staticClass: "fas fa-list" }),
+        _vm._v("\n                Marca\n              "),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticStyle: { width: "1%" } }, [_vm._v("N°")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "30%" } }, [_vm._v("Marca")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center", staticStyle: { width: "2%" } }, [
+          _vm._v("Estado"),
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center", staticStyle: { width: "8%" } }, [
+          _vm._v("Acciones"),
         ]),
       ]),
     ])

@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Administrar categorías</h1>
+            <h1><i class="nav-icon far fas fa-th"></i>Administrar categorías</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

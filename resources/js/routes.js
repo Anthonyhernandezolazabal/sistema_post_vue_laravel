@@ -20,6 +20,11 @@ export const rutas = [
         component: require("./components/modulos/Categorias/index.vue").default,
     },
     {
+        path: "/marcas",
+        name: "marcas.index",
+        component: require("./components/modulos/Marcas/index.vue").default,
+    },
+    {
         path: "/clientes",
         name: "clientes.index",
         component: require("./components/modulos/Clientes/index.vue").default,

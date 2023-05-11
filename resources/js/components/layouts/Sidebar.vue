@@ -73,6 +73,12 @@
                 </router-link>
             </li>
             <li class="nav-item">
+                <router-link :to="'/marcas'"  class="nav-link">
+                    <i class="nav-icon far fas fa-tag"></i>
+                    <p>Marcas</p>
+                </router-link>
+            </li>
+            <li class="nav-item">
               <a href="../widgets.html" class="nav-link">
                 <i class="nav-icon fab fa-product-hunt"></i>
                 <p>Productos</p>

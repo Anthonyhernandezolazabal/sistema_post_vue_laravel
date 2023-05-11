@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\MarcaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +19,14 @@ use Illuminate\Support\Facades\Route;
 /*=== CATEGORÍA ===*/
 Route::post('/categoria/setRegistrarCategoria', [CategoriaController::class, 'setRegistrarCategoria']);
 Route::get('/categoria/getListarCategoria', [CategoriaController::class, 'getListarCategoria']);
-Route::delete('/categoria/delCategoria/{id}', [CategoriaController::class, 'delCategoria']);
 Route::post('/categoria/editCategoria/{id}', [CategoriaController::class, 'editCategoria']);
+Route::delete('/categoria/delCategoria/{id}', [CategoriaController::class, 'delCategoria']);
+
+/*=== MARCA ===*/
+Route::post('/marca/setRegistrarMarca', [MarcaController::class, 'setRegistrarMarca']);
+Route::get('/marca/getListarMarca', [MarcaController::class, 'getListarMarca']);
+Route::post('/marca/editMarca/{id}', [MarcaController::class, 'editMarca']);
+Route::delete('/marca/delMarca/{id}', [MarcaController::class, 'delMarca']);
 
 
 /*=== CLIENTES ===*/
