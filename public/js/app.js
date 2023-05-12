@@ -5680,7 +5680,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
-    console.log("Component index.");
+    this.getListarCategoria();
   },
   data: function data() {
     return {
@@ -5695,14 +5695,17 @@ __webpack_require__.r(__webpack_exports__);
       listCategorias: []
     };
   },
-  created: function created() {
-    this.getListarCategoria();
-  },
   methods: {
+    tabla: function tabla() {
+      this.$nextTick(function () {
+        $("#tblClientes").DataTable();
+      });
+    },
     getListarCategoria: function getListarCategoria() {
       var _this = this;
       axios.get("/categoria/getListarCategoria").then(function (rpta) {
-        return _this.listCategorias = rpta.data;
+        _this.listCategorias = rpta.data;
+        _this.tabla();
       })["catch"](function (error) {
         // handle error
         toastr.error("Ocurrió un error al motrar registro.");
@@ -35232,104 +35235,115 @@ var render = function () {
               _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                _c("table", { staticClass: "table table-striped projects" }, [
-                  _vm._m(4),
-                  _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.listCategorias, function (item) {
-                      return _c("tr", { key: item.id }, [
-                        _c("td", {
-                          domProps: { textContent: _vm._s(item.id) },
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          domProps: { textContent: _vm._s(item.nombre) },
-                        }),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "project-state text-center" }, [
-                          item.estado === 0
-                            ? _c(
-                                "span",
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-striped projects",
+                    attrs: { id: "tblCategoria" },
+                  },
+                  [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.listCategorias, function (item) {
+                        return _c("tr", { key: item.id }, [
+                          _c("td", {
+                            domProps: { textContent: _vm._s(item.id) },
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(item.nombre) },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "project-state text-center" },
+                            [
+                              item.estado === 0
+                                ? _c(
+                                    "span",
+                                    {
+                                      staticClass: "badge badge-success",
+                                      staticStyle: { cursor: "pointer" },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.cambiarEstado(
+                                            item.estado,
+                                            item.id
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [_vm._v("Activo")]
+                                  )
+                                : item.estado === 1
+                                ? _c(
+                                    "span",
+                                    {
+                                      staticClass: "badge badge-danger",
+                                      staticStyle: { cursor: "pointer" },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.cambiarEstado(
+                                            item.estado,
+                                            item.id
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [_vm._v("Inactivo")]
+                                  )
+                                : _c(
+                                    "span",
+                                    { staticClass: "badge badge-danger" },
+                                    [_vm._v("Error")]
+                                  ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "project-actions text-center" },
+                            [
+                              _c(
+                                "button",
                                 {
-                                  staticClass: "badge badge-success",
-                                  staticStyle: { cursor: "pointer" },
+                                  staticClass: "btn btn-warning btn-sm",
+                                  attrs: { type: "button" },
                                   on: {
                                     click: function ($event) {
-                                      return _vm.cambiarEstado(
-                                        item.estado,
-                                        item.id
-                                      )
+                                      return _vm.showEdit(item.id, item.nombre)
                                     },
                                   },
                                 },
-                                [_vm._v("Activo")]
-                              )
-                            : item.estado === 1
-                            ? _c(
-                                "span",
-                                {
-                                  staticClass: "badge badge-danger",
-                                  staticStyle: { cursor: "pointer" },
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.cambiarEstado(
-                                        item.estado,
-                                        item.id
-                                      )
-                                    },
-                                  },
-                                },
-                                [_vm._v("Inactivo")]
-                              )
-                            : _c(
-                                "span",
-                                { staticClass: "badge badge-danger" },
-                                [_vm._v("Error")]
+                                [_c("i", { staticClass: "fas fa-pencil-alt" })]
                               ),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "project-actions text-center" },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-warning btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.showEdit(item.id, item.nombre)
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.delCategoria(
+                                        item.id,
+                                        item.nombre
+                                      )
+                                    },
                                   },
                                 },
-                              },
-                              [_c("i", { staticClass: "fas fa-pencil-alt" })]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.delCategoria(
-                                      item.id,
-                                      item.nombre
-                                    )
-                                  },
-                                },
-                              },
-                              [_c("i", { staticClass: "fas fa-trash" })]
-                            ),
-                          ]
-                        ),
-                      ])
-                    }),
-                    0
-                  ),
-                ]),
+                                [_c("i", { staticClass: "fas fa-trash" })]
+                              ),
+                            ]
+                          ),
+                        ])
+                      }),
+                      0
+                    ),
+                  ]
+                ),
               ]),
             ]),
           ]),
@@ -35349,7 +35363,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "col-sm-6" }, [
             _c("h1", [
               _c("i", { staticClass: "nav-icon far fas fa-th" }),
-              _vm._v("Administrar categorías"),
+              _vm._v(" Administrar categorías"),
             ]),
           ]),
           _vm._v(" "),

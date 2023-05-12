@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><i class="nav-icon far fas fa-th"></i>Administrar categorías</h1>
+            <h1><i class="nav-icon far fas fa-th"></i> Administrar categorías</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -68,7 +68,7 @@
                 </h3>
               </div>
               <div class="card-body">
-                <table class="table table-striped projects">
+                <table class="table table-striped projects" id="tblCategoria">
                   <thead>
                     <tr>
                       <th style="width: 1%">N°</th>
@@ -129,7 +129,7 @@
   <script>
 export default {
   mounted() {
-    console.log("Component index.");
+    this.getListarCategoria();
   },
   data() {
     return {
@@ -144,14 +144,19 @@ export default {
       listCategorias: [],
     };
   },
-  created() {
-    this.getListarCategoria();
-  },
   methods: {
+    tabla(){
+        this.$nextTick(() => {
+            $("#tblClientes").DataTable();
+        })
+    },
     getListarCategoria() {
       axios
         .get("/categoria/getListarCategoria")
-        .then((rpta) => (this.listCategorias = rpta.data))
+        .then((rpta) => {
+            this.listCategorias = rpta.data;
+            this.tabla();
+        })
         .catch(function (error) {
           // handle error
           toastr.error("Ocurrió un error al motrar registro.");
